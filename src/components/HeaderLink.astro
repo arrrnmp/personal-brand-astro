@@ -16,21 +16,24 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 	a {
 		display: inline-block;
 		text-decoration: none;
-		padding: 0.5rem 1rem;
+		padding: 0.5rem 1.1rem;
 		border-radius: 0.5rem;
 		color: var(--text);
-		opacity: 0.7;
-		font-size: 0.875rem;
-		font-variation-settings: 'wght' 400;
-		transition: opacity 0.2s ease, font-variation-settings 0.2s ease, background 0.2s ease;
+		font-size: 1rem;
+		font-variation-settings: 'wght' 580;
+		transition: color 0.18s ease, font-variation-settings 0.18s ease, background 0.18s ease;
 	}
 	a:hover {
-		opacity: 1;
-		font-variation-settings: 'wght' 620;
-		background: rgba(128, 128, 128, 0.1);
+		color: var(--text);
+		font-variation-settings: 'wght' 760;
+		background: rgba(0, 0, 0, 0.05);
 	}
 	a.active {
-		opacity: 1;
-		font-variation-settings: 'wght' 580;
+		color: #FF4F00;
+		font-variation-settings: 'wght' 700;
+	}
+	a:focus-visible {
+		outline: 2px solid #FF4F00;
+		outline-offset: 2px;
 	}
 </style>

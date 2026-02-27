@@ -8,14 +8,13 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://example.com',
+	prefetch: {
+		prefetchAll: true,
+		defaultStrategy: 'hover',
+	},
 	integrations: [mdx(), sitemap()],
 	experimental: {
 		fonts: [
-			{
-				provider: fontProviders.google(),
-				name: 'Archivo',
-				cssVariable: '--font-archivo-expanded',
-			},
 			{
 				provider: fontProviders.google(),
 				name: 'Inter',
