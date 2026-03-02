@@ -2,9 +2,16 @@
 const today = new Date();
 ---
 
-<footer style="background: var(--bg); border-top: 1px solid var(--divider);">
-	<div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-6 py-12 text-xs sm:px-8 md:flex-row" style="color: var(--text-muted);">
-		<p>&copy; {today.getFullYear()} Aaron Mompié. All rights reserved.</p>
-		<p>Built with Astro & Tailwind CSS.</p>
-	</div>
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <p>
+            &copy; {today.getFullYear()} Aaron Mompié. Built for durable systems and
+            thoughtful writing.
+        </p>
+        <div class="footer-links">
+            <a href="/blog">Writing</a>
+            <a href="/about">About</a>
+            <a href="/rss.xml">RSS</a>
+        </div>
+    </div>
 </footer>

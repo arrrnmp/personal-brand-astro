@@ -1,39 +1,30 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<'a'>;
+type Props = HTMLAttributes<"a">;
 
-const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const { href = "/", class: className, ...props } = Astro.props as Props;
+
+const normalizePath = (value: string) => {
+    const cleaned = value
+        .replace(import.meta.env.BASE_URL, "")
+        .replace(/\/+$/, "");
+    return cleaned === "" ? "/" : cleaned;
+};
+
+const currentPath = normalizePath(Astro.url.pathname);
+const targetPath = normalizePath(String(href));
+const isActive =
+    targetPath === "/"
+        ? currentPath === "/"
+        : currentPath === targetPath ||
+          currentPath.startsWith(`${targetPath}/`);
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
-	<slot />
+<a
+    href={href}
+    class:list={["nav-link", className, { active: isActive }]}
+    {...props}
+>
+    <slot />
 </a>
-<style>
-	a {
-		display: inline-block;
-		text-decoration: none;
-		padding: 0.5rem 1.1rem;
-		border-radius: 0.5rem;
-		color: var(--text);
-		font-size: 1rem;
-		font-variation-settings: 'wght' 580;
-		transition: color 0.18s ease, font-variation-settings 0.18s ease, background 0.18s ease;
-	}
-	a:hover {
-		color: var(--text);
-		font-variation-settings: 'wght' 760;
-		background: rgba(0, 0, 0, 0.05);
-	}
-	a.active {
-		color: #FF4F00;
-		font-variation-settings: 'wght' 700;
-	}
-	a:focus-visible {
-		outline: 2px solid #FF4F00;
-		outline-offset: 2px;
-	}
-</style>

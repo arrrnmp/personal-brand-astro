@@ -1,16 +1,15 @@
 ---
-import { SITE_TITLE } from '../consts';
-import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from "../consts";
+import HeaderLink from "./HeaderLink.astro";
 ---
 
-<header transition:persist class="sticky top-0 z-50 backdrop-blur-xl" style="background: var(--bg-nav); border-bottom: 1px solid var(--nav-border);">
-	<nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5 sm:px-8">
-		<a href="/" class="font-display text-sm font-semibold tracking-[0.22em] uppercase transition-opacity duration-200 hover:opacity-70" style="color: var(--text);">
-			{SITE_TITLE}
-		</a>
-		<div class="flex items-center gap-1">
-			<HeaderLink href="/blog">Writing</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-		</div>
-	</nav>
+<header class="site-header anim-fade-down" transition:persist>
+    <nav class="nav-bar" aria-label="Primary">
+        <a href="/" class="brand-name">{SITE_TITLE}</a>
+        <div class="nav-links">
+            <HeaderLink href="/">Home</HeaderLink>
+            <HeaderLink href="/blog">Writing</HeaderLink>
+            <HeaderLink href="/about">About</HeaderLink>
+        </div>
+    </nav>
 </header>

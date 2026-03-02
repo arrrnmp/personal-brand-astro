@@ -1,108 +1,64 @@
 ---
-import { Picture } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import { Picture } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
 
-type Props = CollectionEntry<'blog'>['data'] & { id: string };
+type Props = CollectionEntry<"blog">["data"] & { id: string };
 
 const { id, title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				max-width: 48rem;
-				margin: 0 auto;
-				padding: 2rem 1.5rem 4rem;
-			}
-			.hero-image img {
-				display: block;
-				width: 100%;
-				border-radius: 12px;
-				margin-bottom: 2rem;
-			}
-			.title {
-				margin-bottom: 2rem;
-				padding-bottom: 1.5rem;
-				border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-			}
-			.title h1 {
-				font-size: clamp(1.75rem, 4vw, 2.5rem);
-				font-weight: 700;
-				color: var(--ink);
-				line-height: 1.15;
-				margin: 0 0 0.5rem;
-			}
-			.date {
-				font-size: 0.875rem;
-				color: var(--grey);
-				margin-bottom: 0.25rem;
-			}
-			.prose {
-				font-size: 1.05rem;
-				line-height: 1.75;
-				color: #2a2a2a;
-			}
-			.prose h2, .prose h3, .prose h4 {
-				color: var(--ink);
-				font-weight: 700;
-				margin-top: 2.5rem;
-				margin-bottom: 0.75rem;
-			}
-			.prose a {
-				color: var(--orange);
-				text-decoration: underline;
-				text-underline-offset: 3px;
-			}
-			.prose pre {
-				border-radius: 8px;
-				padding: 1rem 1.25rem;
-				overflow-x: auto;
-				font-size: 0.9rem;
-			}
-			.prose code {
-				font-size: 0.9em;
-			}
-		</style>
-	</head>
+    <head>
+        <BaseHead title={title} description={description} />
+    </head>
+    <body>
+        <Header />
+        <main class="site-main">
+            <section class="section">
+                <div class="container">
+                    <article class="surface article-shell">
+                        {
+                            heroImage && (
+                                <div class="article-cover">
+                                    <Picture
+                                        width={1120}
+                                        height={620}
+                                        src={heroImage}
+                                        alt={title}
+                                        formats={["avif", "webp"]}
+                                        transition:name={`post-image-${id}`}
+                                    />
+                                </div>
+                            )
+                        }
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				{heroImage && (
-					<div class="hero-image">
-						<Picture
-							width={1020}
-							height={510}
-							src={heroImage}
-							alt={title}
-							formats={['avif', 'webp']}
-							transition:name={`post-image-${id}`}
-						/>
-					</div>
-				)}
-				<div class="title">
-					<div class="date">
-						<FormattedDate date={pubDate} />
-						{updatedDate && (
-							<span class="last-updated-on">
-								· Updated <FormattedDate date={updatedDate} />
-							</span>
-						)}
-					</div>
-					<h1>{title}</h1>
-				</div>
-				<div class="prose">
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+                        <div class="article-meta">
+                            <p class="date">
+                                <FormattedDate date={pubDate} />
+                                {
+                                    updatedDate && (
+                                        <span>
+                                            · Updated{" "}
+                                            <FormattedDate date={updatedDate} />
+                                        </span>
+                                    )
+                                }
+                            </p>
+                            <h1 class="article-title">{title}</h1>
+                            <p class="article-description">{description}</p>
+                        </div>
+
+                        <div class="article-content">
+                            <slot />
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+        <Footer />
+    </body>
 </html>
