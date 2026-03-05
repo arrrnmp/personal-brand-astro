@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Page.astro";
+---
+
+<Layout
+	title="Page not found"
+	description="The page you're looking for doesn't exist or has been moved."
+>
+	<p>
+		This page doesn't exist. It may have been moved or removed entirely.
+	</p>
+	<div class="not-found-actions">
+		<a href="/" class="btn btn-primary">Back to home</a>
+		<a href="/blog" class="btn btn-ghost">Browse the blog</a>
+	</div>
+</Layout>
+
+<style>
+	.not-found-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.65rem;
+		margin-top: 1.5rem;
+	}
+</style>

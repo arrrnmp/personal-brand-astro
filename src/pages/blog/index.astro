@@ -6,6 +6,7 @@ import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import { SITE_TITLE } from "../../consts";
+import { getReadingTime } from "../../utils/reading-time";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -21,8 +22,9 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 		/>
 	</head>
 	<body>
+		<a href="#main" class="sr-only skip-link">Skip to content</a>
 		<Header />
-		<main class="site-main">
+		<main id="main" class="site-main">
 			<section class="section page-hero">
 				<div class="container">
 					<h1>Writing archive</h1>
@@ -38,12 +40,9 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 				<div class="container post-list-grid">
 					{
 						posts.map((post) => (
-							<a
-								href={`/blog/${post.id}/`}
-								class="post-list-item surface-soft"
-							>
+							<div class="post-list-item surface-soft">
 								{post.data.heroImage && (
-									<div class="post-list-media">
+									<a href={'/blog/' + post.id + '/'} class="post-list-media">
 										<Picture
 											width={720}
 											height={400}
@@ -51,20 +50,30 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 											alt={post.data.title}
 											formats={["avif", "webp"]}
 											sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 720px"
-											transition:name={`post-image-${post.id}`}
+											transition:name={'post-image-' + post.id}
 										/>
-									</div>
+									</a>
 								)}
 								<div class="post-list-content">
-									<p class="post-list-meta">
-										<FormattedDate
-											date={post.data.pubDate}
-										/>
-									</p>
-									<h2>{post.data.title}</h2>
-									<p>{post.data.description}</p>
+									<a href={'/blog/' + post.id + '/'} class="post-list-link">
+										<p class="post-list-meta">
+											<FormattedDate
+												date={post.data.pubDate}
+											/>
+											· {getReadingTime(post.body ?? "")} min read
+										</p>
+										<h2>{post.data.title}</h2>
+										<p>{post.data.description}</p>
+									</a>
+									{post.data.tags.length > 0 && (
+										<div class="post-list-tags">
+											{post.data.tags.map((tag) => (
+												<a href={'/blog/tag/' + tag + '/'} class="tag-pill">{tag}</a>
+											))}
+										</div>
+									)}
 								</div>
-							</a>
+							</div>
 						))
 					}
 				</div>

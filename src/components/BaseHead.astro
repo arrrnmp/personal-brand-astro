@@ -51,9 +51,17 @@ const imageURL = new URL(image.src, Astro.url);
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
+	rel="preload"
+	as="style"
 	href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Instrument+Serif:ital@0;1&display=swap"
-	rel="stylesheet"
+	onload="this.onload=null;this.rel='stylesheet'"
 />
+<noscript>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Instrument+Serif:ital@0;1&display=swap"
+		rel="stylesheet"
+	/>
+</noscript>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

@@ -24,6 +24,7 @@ const isActive =
 <a
 	href={href}
 	class:list={["nav-link", className, { active: isActive }]}
+	aria-current={isActive ? "page" : undefined}
 	{...props}
 >
 	<slot />

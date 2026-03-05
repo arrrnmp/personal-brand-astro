@@ -20,8 +20,9 @@ const { title, description, heroImage } = Astro.props;
 		<BaseHead title={title} description={description} image={heroImage} />
 	</head>
 	<body>
+		<a href="#main" class="sr-only skip-link">Skip to content</a>
 		<Header />
-		<main class="site-main">
+		<main id="main" class="site-main">
 			<section class="section">
 				<div class="container">
 					<article class="surface article-shell">

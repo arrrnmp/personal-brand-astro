@@ -160,6 +160,8 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 									class="hero-carousel anim-slide-right"
 									style="--delay: 0.35s"
 									aria-label="Photo carousel"
+									role="region"
+									tabindex="0"
 								>
 									<div
 										class="carousel-track"
@@ -418,6 +420,14 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 						goTo(Number(dot.dataset.index));
 					});
 				});
+
+				var carouselEl = track.closest(".hero-carousel");
+				if (carouselEl) {
+					carouselEl.addEventListener("keydown", function (e) {
+						if (e.key === "ArrowRight") { goTo(current + 1); e.preventDefault(); }
+						if (e.key === "ArrowLeft") { goTo(current - 1); e.preventDefault(); }
+					});
+				}
 
 				if (!prefersReduced) {
 					var paused = false;

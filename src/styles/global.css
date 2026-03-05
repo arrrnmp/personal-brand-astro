@@ -12,6 +12,7 @@
 	--accent: #f26522;
 	--accent-soft: rgba(242, 101, 34, 0.1);
 	--accent-warm: #f26522;
+	--accent-hover: #da5a1e;
 	--max-width: 72rem;
 }
 
@@ -70,8 +71,8 @@ a {
 	clip-path: none;
 	padding: 0.55rem 0.8rem;
 	border-radius: 0.55rem;
-	background: #101218;
-	color: #ffffff;
+	background: var(--text);
+	color: var(--bg);
 	font-size: 0.75rem;
 }
 
@@ -125,7 +126,7 @@ a {
 
 .btn-primary:hover {
 	transform: translateY(-1px);
-	background: #da5a1e;
+	background: var(--accent-hover);
 }
 
 .btn-ghost {
@@ -513,10 +514,6 @@ a {
 	transform: scale(1.05);
 }
 
-.fcard-number {
-	display: none;
-}
-
 .fcard-content {
 	position: absolute;
 	bottom: 0;
@@ -695,78 +692,6 @@ a {
 	text-wrap: balance;
 }
 
-.section-lead {
-	margin: 0.85rem 0 0;
-	max-width: 62ch;
-	color: var(--text-muted);
-	line-height: 1.72;
-}
-
-/* -- Writing grid ---------------------------------------- */
-
-.writing-head {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
-	gap: 1rem;
-}
-
-.writing-grid {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 1rem;
-	margin-top: 1.3rem;
-}
-
-.writing-card {
-	display: flex;
-	flex-direction: column;
-	text-decoration: none;
-	overflow: hidden;
-	border-radius: 1rem;
-	border: 1px solid var(--line);
-	background: var(--panel-soft);
-	transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.writing-card:hover {
-	transform: translateY(-2px);
-	border-color: var(--line-strong);
-	box-shadow: 0 14px 30px rgba(10, 14, 22, 0.08);
-}
-
-.writing-card-media img {
-	display: block;
-	width: 100%;
-	aspect-ratio: 16 / 10;
-	object-fit: cover;
-}
-
-.writing-card-body {
-	padding: 0.95rem;
-}
-
-.writing-card-date {
-	margin: 0 0 0.45rem;
-	font-size: 0.7rem;
-	text-transform: uppercase;
-	letter-spacing: 0.14em;
-	color: var(--text-muted);
-}
-
-.writing-card h3 {
-	margin: 0;
-	font-size: 1.2rem;
-	line-height: 1.2;
-	letter-spacing: -0.01em;
-}
-
-.writing-card p {
-	margin: 0.6rem 0 0;
-	line-height: 1.62;
-	color: var(--text-muted);
-}
-
 /* -- Blog archive ---------------------------------------- */
 
 .page-hero {
@@ -795,7 +720,6 @@ a {
 .post-list-item {
 	display: flex;
 	flex-direction: column;
-	text-decoration: none;
 	overflow: hidden;
 	border-radius: 1rem;
 	border: 1px solid var(--line);
@@ -807,6 +731,17 @@ a {
 	transform: translateY(-2px);
 	border-color: var(--line-strong);
 	box-shadow: 0 14px 30px rgba(10, 14, 22, 0.08);
+}
+
+.post-list-media {
+	display: block;
+	text-decoration: none;
+}
+
+.post-list-link {
+	display: block;
+	text-decoration: none;
+	color: inherit;
 }
 
 .post-list-media img {
@@ -886,7 +821,7 @@ a {
 }
 
 .article-content :where(p, li) {
-	color: #262d38;
+	color: var(--text);
 	line-height: 1.78;
 }
 
@@ -900,7 +835,7 @@ a {
 	margin: 2rem 0 0.8rem;
 	line-height: 1.2;
 	letter-spacing: -0.01em;
-	color: #101218;
+	color: var(--text);
 }
 
 .article-content a {
@@ -910,7 +845,7 @@ a {
 }
 
 .article-content pre {
-	background: #f2f5f9;
+	background: var(--bg-soft);
 	border: 1px solid var(--line);
 	border-radius: 0.75rem;
 	padding: 0.92rem 1rem;
@@ -921,7 +856,7 @@ a {
 	margin: 1.4rem 0;
 	padding-left: 1rem;
 	border-left: 3px solid var(--accent);
-	color: #373f4b;
+	color: var(--text-muted);
 }
 
 .about-list {
@@ -930,6 +865,101 @@ a {
 
 .about-list li {
 	margin: 0.45rem 0;
+}
+
+/* -- Tags ------------------------------------------------ */
+
+.article-tags,
+.post-list-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin-top: 0.65rem;
+}
+
+.tag-pill {
+	display: inline-block;
+	padding: 0.22rem 0.6rem;
+	border-radius: 999px;
+	border: 1px solid var(--line-strong);
+	font-size: 0.68rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-decoration: none;
+	color: var(--text-muted);
+	transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.tag-pill:hover {
+	color: var(--accent);
+	border-color: var(--accent);
+	background: var(--accent-soft);
+}
+
+/* -- Table of contents ----------------------------------- */
+
+.toc {
+	margin-bottom: 1.5rem;
+	padding: 1rem 1.2rem;
+	border: 1px solid var(--line);
+	border-radius: 0.75rem;
+	background: var(--panel-soft);
+}
+
+.toc-label {
+	margin: 0 0 0.5rem;
+	font-size: 0.7rem;
+	font-weight: 680;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	color: var(--text-muted);
+}
+
+.toc-list {
+	margin: 0;
+	padding-left: 1.2rem;
+	list-style: decimal;
+}
+
+.toc-list li {
+	margin: 0.3rem 0;
+	font-size: 0.88rem;
+	line-height: 1.5;
+}
+
+.toc-list a {
+	text-decoration: none;
+	color: var(--text);
+	transition: color 0.2s ease;
+}
+
+.toc-list a:hover {
+	color: var(--accent);
+}
+
+.toc-sub {
+	padding-left: 1rem;
+}
+
+/* -- Article footer -------------------------------------- */
+
+.article-footer {
+	margin-top: 2rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--line);
+	text-align: right;
+}
+
+.back-to-top {
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.back-to-top:hover {
+	color: var(--accent);
 }
 
 /* -- Animations ------------------------------------------ */
@@ -1025,11 +1055,17 @@ a {
 	}
 
 	.featured-cards {
-		grid-template-columns: 1fr;
+		display: flex;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		gap: 0.75rem;
+		padding-bottom: 0.5rem;
 	}
 
-	.writing-grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+	.fcard {
+		flex: 0 0 min(80vw, 20rem);
+		scroll-snap-align: start;
 	}
 }
 
@@ -1042,28 +1078,33 @@ a {
 		width: min(100% - 1.4rem, var(--max-width));
 	}
 
-	.center-pill-nav {
-		gap: 0.1rem;
-		padding: 0.28rem;
-	}
-
-	.brand-pill {
-		padding-inline: 0.74rem;
-		letter-spacing: 0.14em;
-	}
-
 	.nav-link {
 		padding: 0.45rem 0.52rem;
 		letter-spacing: 0.1em;
-	}
-
-	.writing-grid {
-		grid-template-columns: 1fr;
+		min-height: 2.75rem;
 	}
 
 	.footer-inner {
 		flex-direction: column;
 		align-items: flex-start;
+	}
+
+	.footer-links a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+		padding: 0.4rem 0;
+	}
+
+	.social-link {
+		width: 2.75rem;
+		height: 2.75rem;
+	}
+
+	.tag-pill {
+		min-height: 2.2rem;
+		display: inline-flex;
+		align-items: center;
 	}
 
 	.snap-section {
@@ -1077,6 +1118,10 @@ a {
 
 	.hero-carousel {
 		display: none;
+	}
+
+	.post-list-grid {
+		gap: 1.25rem;
 	}
 }
 
